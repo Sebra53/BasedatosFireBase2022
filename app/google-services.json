@@ -1,37 +1,27 @@
 {
   "project_info": {
-    "project_number": "157388345417",
-    "firebase_url": "https://ppipvg2021-default-rtdb.firebaseio.com",
-    "project_id": "ppipvg2021",
-    "storage_bucket": "ppipvg2021.appspot.com"
+    "project_number": "99257326616",
+    "firebase_url": "https://basedatosfirebase2022-f0cd2-default-rtdb.firebaseio.com",
+    "project_id": "basedatosfirebase2022-f0cd2",
+    "storage_bucket": "basedatosfirebase2022-f0cd2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:157388345417:android:62ff4683de99c7db0f2f98",
+        "mobilesdk_app_id": "1:99257326616:android:11816343502a1a166d776d",
         "android_client_info": {
           "package_name": "cl.isisur.basedatosfirebase2022"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "157388345417-vc98pn9vifj3eid3r7im2jb0n4e3quqj.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCmB-YRgMnYRgMHwz-e2026253hs9fa8DQ"
+          "current_key": "AIzaSyAZscesBHebuRT-D9nKByPZhn2pGGvTo0w"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "157388345417-vc98pn9vifj3eid3r7im2jb0n4e3quqj.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
