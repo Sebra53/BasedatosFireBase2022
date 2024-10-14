@@ -3,7 +3,9 @@ package cl.isisur.basedatosfirebase2022;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +30,7 @@ import cl.isisur.basedatosfirebase2022.Clases.Producto;
 public class MainLista extends AppCompatActivity {
 
 
+    Button bTVolver;
     ListView lvLista;
     private List<Producto> listProducto = new ArrayList<Producto>();
     private List<String> ListLibroNombre = new ArrayList();
@@ -46,12 +49,22 @@ public class MainLista extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_lista);
 
+        bTVolver=findViewById(R.id.bTVolver);
         lvLista=findViewById(R.id.LvLista);
 
         inicializarFireBase();
         lista();
 
         Intent intent2 = new Intent(this,MainActivity.class);
+
+        bTVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(intent2);
+
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -67,7 +80,7 @@ public class MainLista extends AppCompatActivity {
                 for (DataSnapshot objs : snapshot.getChildren()){
                     Producto li =objs.getValue(Producto.class);
                     listProducto.add(li);
-                    ListLibroNombre.add(""+li.getNombre()+" "+li.getPrecio());
+                    ListLibroNombre.add("producto: "+li.getNombre()+" precio: "+li.getPrecio());
                     arrayAdapterString =new ArrayAdapter<String>(MainLista.this, android.R.layout.simple_expandable_list_item_1,ListLibroNombre);
                     lvLista.setAdapter(arrayAdapterString);
                 }

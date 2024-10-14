@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import cl.isisur.basedatosfirebase2022.Clases.Cliente;
 import cl.isisur.basedatosfirebase2022.Clases.Producto;
 
 
@@ -30,17 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    EditText eTNombre,eTEditorial;
+    EditText eTNombre,eTEditorial,eTocupacion;
     Button bTBoton, btListar;
     
 
 
-    ListView lvListadoProductos;
-    private List<Producto> listProducto = new ArrayList<Producto>();
-    private List<String> ListLibroNombre = new ArrayList();
 
-    ArrayAdapter<String> arrayAdapterString;
-    ArrayAdapter<Producto> arrayAdapterProducto;
 
 
     FirebaseDatabase firebaseDatabase;
@@ -58,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         eTNombre=findViewById(R.id.eTNombre);
         eTEditorial=findViewById(R.id.eTEditorial);
+        eTocupacion = findViewById(R.id.eTocupacion);
         bTBoton=findViewById(R.id.bTAgregar);
         btListar=findViewById(R.id.bTLista);
-        lvListadoProductos=findViewById(R.id.lvListado);
+
 
         inicializarFireBase();
-        listarDatos();
+
 
         Intent intent = new Intent(this,MainLista.class);
 
@@ -72,12 +69,13 @@ public class MainActivity extends AppCompatActivity {
         bTBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Producto producto = new Producto();
+                Cliente cliente = new Cliente();
                 //libro.setIdAutor("11111");
-                producto.setIdAutor(UUID.randomUUID().toString());
-                producto.setNombre(eTNombre.getText().toString());
-                producto.setPrecio(eTEditorial.getText().toString());
-                databaseReference.child("Libro").child(producto.getIdAutor()).setValue(producto);
+                cliente.setIdCliente(UUID.randomUUID().toString());
+                cliente.setNombreC(eTNombre.getText().toString());
+                cliente.setrut(eTEditorial.getText().toString());
+                cliente.setOcupacion(eTocupacion.getText().toString());
+                databaseReference.child("Cliente").child(cliente.getIdCliente()).setValue(cliente);
 
 
             }
@@ -99,26 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void listarDatos() {
-        databaseReference.child("Libro").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listProducto.clear();
-                for (DataSnapshot objs : snapshot.getChildren()){
-                    Producto li =objs.getValue(Producto.class);
-                    listProducto.add(li);
-                    ListLibroNombre.add(""+li.getNombre()+" "+li.getPrecio());
-                    arrayAdapterString =new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_expandable_list_item_1,ListLibroNombre);
-                    lvListadoProductos.setAdapter(arrayAdapterString);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 
     private void inicializarFireBase(){
