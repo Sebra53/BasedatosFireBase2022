@@ -1,5 +1,7 @@
 package cl.isisur.basedatosfirebase2022;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,26 +27,31 @@ import cl.isisur.basedatosfirebase2022.Clases.Producto;
 
 public class MainLista extends AppCompatActivity {
 
-    ListView lvListadoProductos;
+
+    ListView lvLista;
     private List<Producto> listProducto = new ArrayList<Producto>();
     private List<String> ListLibroNombre = new ArrayList();
 
     ArrayAdapter<String> arrayAdapterString;
-
-
+    ArrayAdapter<Producto> arrayAdapterProducto;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_lista);
 
-        lvListadoProductos=findViewById(R.id.lvListadoProductos);
+        lvLista=findViewById(R.id.LvLista);
 
         inicializarFireBase();
-        listarDatos();
+        lista();
+
+        Intent intent2 = new Intent(this,MainActivity.class);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -52,9 +59,8 @@ public class MainLista extends AppCompatActivity {
             return insets;
         });
     }
-
-    private void listarDatos() {
-        databaseReference.child("Libro").addValueEventListener(new ValueEventListener() {
+    private void lista() {
+        databaseReference.child("producto").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listProducto.clear();
@@ -63,7 +69,7 @@ public class MainLista extends AppCompatActivity {
                     listProducto.add(li);
                     ListLibroNombre.add(""+li.getNombre()+" "+li.getPrecio());
                     arrayAdapterString =new ArrayAdapter<String>(MainLista.this, android.R.layout.simple_expandable_list_item_1,ListLibroNombre);
-                    lvListadoProductos.setAdapter(arrayAdapterString);
+                    lvLista.setAdapter(arrayAdapterString);
                 }
             }
 
@@ -80,6 +86,8 @@ public class MainLista extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference =firebaseDatabase.getReference();
     }
+
+
 
 
 }

@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainLista">
 
-    <ListView
-        android:id="@+id/lvListadoProductos"
-        android:layout_width="415dp"
-        android:layout_height="663dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014" />
-
     <Button
         android:id="@+id/bTVolver"
         android:layout_width="386dp"
@@ -25,7 +15,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvListadoProductos"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/LvLista"
+        android:layout_width="409dp"
+        android:layout_height="677dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
